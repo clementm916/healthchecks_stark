@@ -1,17 +1,26 @@
 language: python
 python:
+  - "2.6"
   - "2.7"
+  - "3.2"
+  - "3.3"
   - "3.4"
-install:
-    - pip install -r requirements.txt
-    - pip install braintree coveralls mock mysqlclient
+  - "3.5"
+  - "3.5-dev" # 3.5 development branch
+  - "3.6-dev" # 3.6 development branch
+  - "nightly" # currently points to 3.7-dev
+# command to install dependencies
+install: "pip install -r requirements.txt"
+      - pip install braintree coveralls mock mysqlclient
+
 env:
   - DB=sqlite
   - DB=mysql
   - DB=postgres
+
 addons:
   postgresql: "9.4"
-script:
-  - coverage run --omit=*/tests/* --source=hc manage.py test
+# command to run tests
+script: nose
 after_success: coveralls
 cache: pip
