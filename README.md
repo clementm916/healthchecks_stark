@@ -1,4 +1,4 @@
-# healthchecks       https://travis-ci.org/andela/healthchecks_stark.svg?branch=kanyi
+# healthchecks       [![Build Status](https://travis-ci.org/andela/healthchecks_stark.svg?branch=kanyi)](https://travis-ci.org/andela/healthchecks_stark)
 
 [![Build Status](https://travis-ci.org/healthchecks/healthchecks.svg?branch=master)](https://travis-ci.org/healthchecks/healthchecks)
 [![Coverage Status](https://coveralls.io/repos/healthchecks/healthchecks/badge.svg?branch=master&service=github)](https://coveralls.io/github/healthchecks/healthchecks?branch=master)
