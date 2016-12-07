@@ -1,30 +1,28 @@
 language: python
 python:
-  - "3.5"
+- '3.5'
 install:
-    - pip install -r requirements.txt
-    - pip install braintree coveralls mock mysqlclient
+- pip install -r requirements.txt
+- pip install braintree coveralls mock mysqlclient
 env:
-  - DB=sqlite
-  - DB=postgres
+- DB=sqlite
+- DB=postgres
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
 before_script:
-  
-  - psql -c 'CREATE DATABASE hc;' -U postgres
+- psql -c 'CREATE DATABASE hc;' -U postgres
 script:
-  - python manage.py makemigrations 
-  - python manage.py migrate
-  - python manage.py collectstatic --noinput
-  - coverage run --omit=*/tests/* --source=hc manage.py test
+- python manage.py makemigrations
+- python manage.py migrate
+- python manage.py collectstatic --noinput
+- coverage run --omit=*/tests/* --source=hc manage.py test
 after_success: coveralls
 cache: pip
-
-
 deploy:
   provider: heroku
   api_key:
-    secure: J5yJg83gDxKw9+EufguL8s7QACXJn36Bwl3riImLhHW/WckE6kvuFX7jLBDL5bzOMO3zkYCBr/jSFIHyiAEFTxWOlHaS4u0dH9TvMk9EmTLG9UjVpNfabKE4l62Q6isyeNXpiSBupFY9JtGLWvElkHXNQgZohabxZTMSRVEvnRw3oDAoZnkHgL2mJPyHnOeqe/MuoXloZ5WMeZp7IfUB+ctbKOwPfCRQThWscf8uEc65HxQtHKJlAl4i98gTK9djvWBfujkzE2mRxwiIl6BX3y33EBUiW4ZFcoR+BmVj0VS8qJfiVx2gJdvoAOqZzzzYVTqtFmB3q7GGM3mvL7S9h3QTnRzq31DyQSqAU+Z8MHgMW90VuXpykEuBIeqptB2E4m0t1KRzHOF+ez7w9rhPztfwCCa25SmmC18VZ6gESU7kZLUUd9gq5t6j1Vlm9b7FW1rJtnfI9rkfxuiynpv/hbaveXUfNB2/MtgxZnfcS333iOFDzhNzztT5RjkrQs+T8UMm9lh4HB0X2cyuWLIjRXXhJIXCnq5vFHGm7QY5h/uk2UTc3DGg8qL30l4HINYMG+JuJvvxTy8Ev1iQyB4PkJXKl0EIRG9Uo4IGoO6xi6v8nDpZWFF6FaO5xREDrOIHcVLOz6hoEtcMAy7qCQkPkB2Ptye9KMS+SeP7A2nZOvI=
+    secure: vj/h0TofypN/aT4zgP2HHfww8HRgs0y42XIs2OJ/kA5zhMszfNDYFWFctfMc6OXboNFJ3uagAkJ1S7N+M2B5jDHwUMoc11Zm/n/fsToYWn1pW+zD3Xy9bSW4dS/MPDoIroYQVesyrtvFAdxdd6sqCFBvjRiDRKvZsOu0lc3l4Ya6WcHgrKudYAIIFKyRx4PrmMEJ/ESlGnHn1M5MBr8vE73uVFzUSt1+nTAweP+XdKWymTbSYd1OxVgvedue5XAYmiCCbbio0T1HVL+MqaQIBFwrUI/0oGxGEy5Ys4GESitb6rtaawYhDbyL+7ow5FDcg0g5T0nUbsb54Y65LHl8OjWIBLD97K3W1zI3eJwXexiKZeCMLYCARg3ueg5SxZkpcbXqHaNcvGUwsAui8bblpVB0UstxxjCQRuLSyN0rI0lhccpmCbJetPnqA2FKH4PK1lAHZImIrEChz9rDUbeGOytZ/+n1PwCZM01jW/F1FHLAESdNOqGrhFeQSipOQYPTIjr77JTqMFyY33/G5ZmW5suZ9vQT8A8dak2vgETmonT2VbuQIsyn4f33EC75uct/rybMZpOvvvVjzM/+M75Jp0XEEEh5wzBU4P0DesM0YgjBVU+gO1P6bEMvmi63PbBbWXSeggLCRDflgMebqMSg5FTi7msUfaDqf6LQmmbUYSU=
   app: stark-healthchecks
   on:
     repo: clementm916/healthchecks_stark
+    branch: heroku-setup
